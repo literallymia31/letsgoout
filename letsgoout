@@ -1,104 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dinner with Amir 🍽️💖</title>
+  <meta charset="UTF-8">
+  <title>Dinner Invitation 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      height: 100vh;
+      margin: 0;
     }
 
     .card {
-      background: white;
-      padding: 40px 30px;
+      background: #fff;
+      padding: 40px;
       border-radius: 25px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       max-width: 90%;
     }
 
     h1 {
+      color: #ff69b4;
       font-size: 2rem;
-      color: #e75480;
     }
 
     p {
-      font-size: 1.2rem;
-      color: #444;
-      margin-bottom: 30px;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 20px;
     }
 
     button {
-      background: #e75480;
+      background: #ff69b4;
       color: white;
       border: none;
       padding: 12px 24px;
       font-size: 1rem;
       margin: 10px;
-      border-radius: 50px;
+      border-radius: 40px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: #d43f6f;
+      background: #ff1493;
     }
 
-    .thank-you {
-      font-size: 1.1rem;
-      margin-top: 20px;
-      color: #444;
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="card" id="inviteCard">
-    <h1>Hi Amir Haziq! 🌟</h1>
-    <p>You’ve completed your exams and I’m so proud of you! 🥺💖<br>
-    Wanna go for a dinner with me tonight? 🍽️💕</p>
-    <button onclick="reply('Yes')">Yes! 😍</button>
-    <button onclick="reply('No')">Maybe next time 😢</button>
+  <div class="card">
+    <h1>Hi Amir Haziq! 💌</h1>
+    <p>You’ve completed your exams and I’m so proud of you! 🥺💕<br>
+    Would you go to dinner with me tonight? 🍽️✨</p>
+
+    <form action="https://formsubmit.co/your@email.com" method="POST">
+      <input type="hidden" name="_subject" value="Dinner Response from Amir Haziq 💖">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="Amir's Name" value="Amir Haziq">
+
+      <button type="submit" name="Dinner Response" value="Yes! I would love to!">Yes 😍</button>
+      <button type="submit" name="Dinner Response" value="Sorry, maybe next time! 🥺">No 😢</button>
+    </form>
+
+    <p>Thank you so much for replying! 💖</p>
   </div>
-
-  <div id="thankYouMessage" class="thank-you"></div>
-
-  <script>
-    function reply(answer) {
-      localStorage.setItem('amirAnswer', answer);
-      document.getElementById('inviteCard').style.display = 'none';
-
-      let msg = "";
-      if (answer === 'Yes') {
-        msg = "Yay! 🥰 I can't wait to see you at dinner tonight! Thank you Amir 💗";
-      } else {
-        msg = "Aww okay 🥺 Maybe next time, and thank you for replying anyway 💌";
-      }
-
-      document.getElementById('thankYouMessage').innerText = msg;
-    }
-
-    // Optional: Show his previous response if you reload
-    window.onload = () => {
-      const saved = localStorage.getItem('amirAnswer');
-      if (saved) {
-        document.getElementById('inviteCard').style.display = 'none';
-        document.getElementById('thankYouMessage').innerText = 
-          saved === 'Yes' 
-          ? "You already said YES! 🥰 See you at dinner 💕"
-          : "You said no 😢 Maybe next time okay? 💖";
-      }
-    };
-  </script>
 
 </body>
 </html>
