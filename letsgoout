@@ -2,134 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dinner Invitation</title>
+  <title>Dinner with Amir 🍽️💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
       flex-direction: column;
-      color: #333;
     }
 
     .card {
       background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 40px 30px;
+      border-radius: 25px;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       max-width: 90%;
     }
 
     h1 {
-      font-size: 2.5rem;
-      color: #ff69b4;
+      font-size: 2rem;
+      color: #e75480;
     }
 
     p {
       font-size: 1.2rem;
-      margin-bottom: 20px;
+      color: #444;
+      margin-bottom: 30px;
     }
 
     button {
-      background: #ff69b4;
+      background: #e75480;
       color: white;
       border: none;
-      padding: 15px 30px;
+      padding: 12px 24px;
       font-size: 1rem;
+      margin: 10px;
       border-radius: 50px;
       cursor: pointer;
       transition: 0.3s;
     }
 
     button:hover {
-      background: #ff1493;
+      background: #d43f6f;
     }
 
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .heart {
-      width: 20px;
-      height: 20px;
-      background: red;
-      position: absolute;
-      transform: rotate(45deg);
-      animation: float 4s infinite ease-in;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-      position: absolute;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      top: 0;
-      left: -10px;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg);
-        opacity: 0;
-      }
+    .thank-you {
+      font-size: 1.1rem;
+      margin-top: 20px;
+      color: #444;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Hi Amir Haziq! 🎉</h1>
-    <p>You’ve finished all your exams! I’m so proud of you 🥺❤️</p>
-    <p>Would you do me the honor of joining me for dinner tonight? 🍽️✨</p>
-    <button onclick="respond()">Yes, I’d love to! 💕</button>
+
+  <div class="card" id="inviteCard">
+    <h1>Hi Amir Haziq! 🌟</h1>
+    <p>You’ve completed your exams and I’m so proud of you! 🥺💖<br>
+    Wanna go for a dinner with me tonight? 🍽️💕</p>
+    <button onclick="reply('Yes')">Yes! 😍</button>
+    <button onclick="reply('No')">Maybe next time 😢</button>
   </div>
 
-  <div class="hearts" id="hearts"></div>
+  <div id="thankYouMessage" class="thank-you"></div>
 
   <script>
-    function respond() {
-      alert("Yay! I'll pick the best place for us 💘");
+    function reply(answer) {
+      localStorage.setItem('amirAnswer', answer);
+      document.getElementById('inviteCard').style.display = 'none';
+
+      let msg = "";
+      if (answer === 'Yes') {
+        msg = "Yay! 🥰 I can't wait to see you at dinner tonight! Thank you Amir 💗";
+      } else {
+        msg = "Aww okay 🥺 Maybe next time, and thank you for replying anyway 💌";
+      }
+
+      document.getElementById('thankYouMessage').innerText = msg;
     }
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = '100vh';
-      document.getElementById('hearts').appendChild(heart);
-
-      setTimeout(() => heart.remove(), 4000);
-    }
-
-    setInterval(createHeart, 300);
+    // Optional: Show his previous response if you reload
+    window.onload = () => {
+      const saved = localStorage.getItem('amirAnswer');
+      if (saved) {
+        document.getElementById('inviteCard').style.display = 'none';
+        document.getElementById('thankYouMessage').innerText = 
+          saved === 'Yes' 
+          ? "You already said YES! 🥰 See you at dinner 💕"
+          : "You said no 😢 Maybe next time okay? 💖";
+      }
+    };
   </script>
+
 </body>
 </html>
